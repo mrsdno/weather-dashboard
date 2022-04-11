@@ -1,9 +1,17 @@
 var selectedCityEl = document.querySelector(".selected-city-container");
+var apiKey = "e53b451ac79065e81383f7950853a84e"
+
+var getLatLon = function() {
+    var cityState = document.querySelector("#location");
+    var apiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityState + "&limit={limit}&appid=" + apiKey;
+}
 
 var getWeatherData = function() {
     var lat = "-33.44"
     var lon = "-94.04"
-    var apiKey = "e53b451ac79065e81383f7950853a84e"
+
+    //city,state,country
+    
     var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=hourly,daily&appid=" + apiKey;
 
     fetch(apiUrl).
