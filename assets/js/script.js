@@ -44,6 +44,12 @@ var formSubmitHandler = function (event) {
         getLatLon(cityState);
         cityStateEl.value="";
         selectedCityEl.textContent = ""
+        oneDayEl.textContent = ""
+        twoDayEl.textContent = ""
+        threeDayEl.textContent = ""
+        fourDayEl.textContent = ""
+        fiveDayEl.textContent = ""
+
 
     }
 }
@@ -105,12 +111,15 @@ var getForecastData =function(city) {
 }
 
 var displayWeatherData = function(response) {
-    var currentDateEl = document.createElement("div");
-    var currentTempEl = document.createElement("div");
-    var currentWindEl = document.createElement("div");
-    var currentHumidityEl = document.createElement("div");
-    var currentUVEl = document.createElement("div");
+    var currentDateEl = document.createElement("h2");
+    var currentTempEl = document.createElement("p");
+    var currentWindEl = document.createElement("p");
+    var currentHumidityEl = document.createElement("p");
+    var currentUVEl = document.createElement("p");
 
+    var currentDate = new Date(response.current.dt * 1000)
+
+    console.log(currentDate);
     currentDateEl.textContent = "Current Date: " + response.current.dt;
     currentTempEl.textContent = "Current Temperature: " + response.current.temp;
     currentWindEl.textContent = "Current Wind Speed: " + response.current.wind_speed;
