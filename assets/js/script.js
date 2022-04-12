@@ -5,17 +5,20 @@ var apiKey = "e53b451ac79065e81383f7950853a84e"
 
 
 var getLatLon = function(location) {
-    var apiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + location + "&limit=5&appid=" + apiKey;
+    var apiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + location + "&limit=1&appid=" + apiKey;
     
     fetch(apiUrl).
     then(function(response) {
         if (response.ok) {
             response.json().then(function(response){
                 console.log(response);
+                var cityArray = response;
+                console.log(cityArray);
+                getWeatherData(cityArray);
             })
         }
         else {
-            alert("Error: City/State not found.")
+            alert("Error: Something went wrong.")
         }
     })
     .catch(function(error) {
@@ -26,38 +29,46 @@ var getLatLon = function(location) {
 
 var formSubmitHandler = function (event) {
     event.preventDefault();
+
+    //clear old content
+
     var cityStateSpaces = cityStateEl.value.trim();
     var cityState = cityStateSpaces.split(' ').join('');
 
     if (cityState) {
         getLatLon(cityState);
         cityStateEl.value="";
+        selectedCityEl.textContent = ""
 
     }
 }
 
-var getWeatherData = function() {
-    var lat = "-33.44"
-    var lon = "-94.04"
+var getWeatherData = function(city) {
+    var location = city;
 
-    //city,state,country
-    
-    var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=hourly,daily&appid=" + apiKey;
+    if(location.length >= 1) {
+        var lat = location[0].lat;
+        var lon = location[0].lon;
+        var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&exclude=hourly,daily&appid=" + apiKey;
 
-    fetch(apiUrl).
-    then(function(response) {
-        if (response.ok) {
-            response.json().then(function(response){
-                displayWeatherData(response);
-            })
-        }
-        else {
-            alert("Error: City not found.");
-        }
-    })
-    .catch(function(error){
-        alert("Unable to connect to GitHub");
-    })
+        fetch(apiUrl).
+        then(function(response) {
+            if (response.ok) {
+                response.json().then(function(response){
+                    displayWeatherData(response);
+                })
+            }
+            else {
+                alert("Error: City not found.");
+            }
+        })
+        .catch(function(error){
+            alert("Unable to connect to GitHub");
+        })
+    }
+    else {
+        alert("Can't get weather data for this city."); 
+    }
 }
 
 var displayWeatherData = function(response) {
@@ -80,8 +91,6 @@ var displayWeatherData = function(response) {
 
 
 userFormEl.addEventListener("click", formSubmitHandler);
-
-getWeatherData();
 
 
 // Temp
