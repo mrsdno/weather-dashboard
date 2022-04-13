@@ -7,7 +7,9 @@ var twoDayEl = document.querySelector("#two-day");
 var threeDayEl = document.querySelector("#three-day");
 var fourDayEl = document.querySelector("#four-day");
 var fiveDayEl = document.querySelector("#five-day");
-
+var savedCitiesEl = document.querySelector(".saved-cities-container");
+var saveCityBtn = document.querySelector("#save-btn");
+var city = "";
 
 var getLatLon = function(location) {
     var apiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + location + "&limit=1&appid=" + apiKey;
@@ -42,15 +44,15 @@ var formSubmitHandler = function (event) {
 
     if (cityState) {
         getLatLon(cityState);
+
+        // clear old data
         cityStateEl.value="";
-        selectedCityEl.textContent = ""
-        oneDayEl.textContent = ""
-        twoDayEl.textContent = ""
-        threeDayEl.textContent = ""
-        fourDayEl.textContent = ""
-        fiveDayEl.textContent = ""
-
-
+        selectedCityEl.textContent = "";
+        oneDayEl.textContent = "";
+        twoDayEl.textContent = "";
+        threeDayEl.textContent = "";
+        fourDayEl.textContent = "";
+        fiveDayEl.textContent = "";
     }
 }
 
@@ -58,6 +60,7 @@ var getWeatherData = function(city) {
     var location = city;
 
     if(location.length >= 1) {
+        city = location[0].name;
         var lat = location[0].lat;
         var lon = location[0].lon;
         var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&exclude=hourly,daily&appid=" + apiKey;
@@ -66,7 +69,7 @@ var getWeatherData = function(city) {
         then(function(response) {
             if (response.ok) {
                 response.json().then(function(response){
-                    displayWeatherData(response);
+                    displayWeatherData(response, city);
                 })
             }
             else {
@@ -110,8 +113,9 @@ var getForecastData =function(city) {
     }
 }
 
-var displayWeatherData = function(response) {
+var displayWeatherData = function(response, city) {
     // create elements to hold data
+    var currentCityEl = document.createElement("h2");
     var currentDateEl = document.createElement("h2");
     var currentIconEl = document.createElement("img");
     var currentDescriptionEl = document.createElement("span");
@@ -124,7 +128,8 @@ var displayWeatherData = function(response) {
     var currentDate = moment.unix(response.current.dt).format("MM/DD/YYYY");
 
     // fill elements with appropiate data
-    currentDateEl.textContent = currentDate;
+    currentCityEl.textContent = city;
+    currentDateEl.textContent = " " + currentDate;
     currentIconEl.setAttribute("src", "./assets/img/" + response.current.weather[0].icon + ".png")
     currentDescriptionEl.textContent = response.current.weather[0].description
     currentTempEl.textContent = "Current Temperature: " + response.current.temp;
@@ -133,6 +138,7 @@ var displayWeatherData = function(response) {
     currentUVEl.textContent = "Current UV-index: " + response.current.uvi;
 
     // append elements to page
+    selectedCityEl.appendChild(currentCityEl);
     selectedCityEl.appendChild(currentDateEl);
     selectedCityEl.appendChild(currentIconEl);
     selectedCityEl.appendChild(currentDescriptionEl);
@@ -140,6 +146,10 @@ var displayWeatherData = function(response) {
     selectedCityEl.appendChild(currentWindEl);
     selectedCityEl.appendChild(currentHumidityEl);
     selectedCityEl.appendChild(currentUVEl);
+
+    // add attribute to city element to select text later
+    currentCityEl.setAttribute("id", "city-name");
+
 }
 
 var displayForcastData = function(response) {
@@ -255,9 +265,23 @@ var displayForcastData = function(response) {
     fiveDayEl.appendChild(fiveDayHumidityEl);
 }
 
+var saveCity = function(city) {
+    var cityName = document.querySelector("#city-name")
+
+    console.log(cityName.textContent);
+
+    var savedCityBtn = document.createElement("button");
+    console.log(savedCityBtn);
+
+    savedCityBtn.innerHTML = cityName.textContent;
+
+    savedCitiesEl.appendChild(savedCityBtn);
+}
+
 
 userFormEl.addEventListener("click", formSubmitHandler);
 
+saveCityBtn.addEventListener("click", saveCity);
 
 // Temp
 // Wind
