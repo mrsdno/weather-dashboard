@@ -8,6 +8,8 @@
 .search-container {
  background-color: lightgray;
  padding: 20px;
+ align-items: center;
+ justify-content: center;
 }
 
 .search-container input {
@@ -26,14 +28,43 @@
 
 
 /* end search container */
-.selected-city-container {
 
+/* current weather display */
+
+.selected-city-container {
+    background-color: rgba(38, 91, 95, 0.3);
+}
+
+.selected-city-container img {
+    width: 50px;
+    height: auto;
+}
+
+.selected-city-container h2 {
+    display: inline;
+}
+
+/* five day forecast */
+
+.five-day {
+    background-color: #36454F;
+    color: #fff;
+    margin: 5px;
+}
+
+.five-day h3 {
+    font-size: 20px;
+}
+
+.five-day p {
+    font-size: 12px;
+}
+
+.five-day-forcast-container {
+padding: 10px;
 }
 
 .popular-city-container {
 
 }
 
-.five-day-forcast-container {
-
-}
