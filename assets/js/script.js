@@ -146,7 +146,7 @@ var displayForcastData = function(response) {
     // 1 day 
     // create elements to hold data
     var oneDayDateEl = document.createElement("h3");
-    var oneDayIconEl = document.createElement("p");
+    var oneDayIconEl = document.createElement("img");
     var oneDayTempEl = document.createElement("p");
     var oneDayWindEl = document.createElement("p");
     var oneDayHumidityEl = document.createElement("p");
@@ -155,7 +155,7 @@ var displayForcastData = function(response) {
     var oneDayDate = moment.unix(response.list[4].dt).format("MM/DD/YY");
 
     oneDayDateEl.textContent = oneDayDate;
-    oneDayIconEl.textContent = "Icon: " + response.list[4].weather[0].icon;
+    oneDayIconEl.setAttribute("src", "./assets/img/" + response.list[4].weather[0].icon + ".png");
     oneDayTempEl.textContent = "Temp: " + response.list[4].main.temp;
     oneDayWindEl.textContent = "Wind: " + response.list[4].wind.speed;
     oneDayHumidityEl.textContent = "Humidity: " + response.list[4].main.humidity;
@@ -168,7 +168,7 @@ var displayForcastData = function(response) {
 
     // 2 day
     var twoDayDateEl = document.createElement("h3");
-    var twoDayIconEl = document.createElement("p");
+    var twoDayIconEl = document.createElement("img");
     var twoDayTempEl = document.createElement("p");
     var twoDayWindEl = document.createElement("p");
     var twoDayHumidityEl = document.createElement("p");
@@ -177,7 +177,7 @@ var displayForcastData = function(response) {
     var twoDayDate = moment.unix(response.list[12].dt).format("MM/DD/YY");
 
     twoDayDateEl.textContent = twoDayDate;
-    twoDayIconEl.textContent = "Icon: " + response.list[12].weather[0].icon;
+    twoDayIconEl.setAttribute("src", "./assets/img/" + response.list[12].weather[0].icon + ".png");
     twoDayTempEl.textContent = "Temp: " + response.list[12].main.temp;
     twoDayWindEl.textContent = "Wind: " + response.list[12].wind.speed;
     twoDayHumidityEl.textContent = "Humidity: " + response.list[12].main.humidity;
@@ -190,7 +190,7 @@ var displayForcastData = function(response) {
 
     // 3 day
     var threeDayDateEl = document.createElement("h3");
-    var threeDayIconEl = document.createElement("p");
+    var threeDayIconEl = document.createElement("img");
     var threeDayTempEl = document.createElement("p");
     var threeDayWindEl = document.createElement("p");
     var threeDayHumidityEl = document.createElement("p");
@@ -199,7 +199,7 @@ var displayForcastData = function(response) {
     var threeDayDate = moment.unix(response.list[20].dt).format("MM/DD/YY");
 
     threeDayDateEl.textContent = threeDayDate;
-    threeDayIconEl.textContent = "Icon: " + response.list[20].weather[0].icon;
+    threeDayIconEl.setAttribute("src", "./assets/img/" + response.list[20].weather[0].icon + ".png");
     threeDayTempEl.textContent = "Temp: " + response.list[20].main.temp;
     threeDayWindEl.textContent = "Wind: " + response.list[20].wind.speed;
     threeDayHumidityEl.textContent = "Humidity: " + response.list[20].main.humidity;
@@ -212,7 +212,7 @@ var displayForcastData = function(response) {
 
     // 4 day
     var fourDayDateEl = document.createElement("h3");
-    var fourDayIconEl = document.createElement("p");
+    var fourDayIconEl = document.createElement("img");
     var fourDayTempEl = document.createElement("p");
     var fourDayWindEl = document.createElement("p");
     var fourDayHumidityEl = document.createElement("p");
@@ -221,7 +221,7 @@ var displayForcastData = function(response) {
     var fourDayDate = moment.unix(response.list[28].dt).format("MM/DD/YY");
 
     fourDayDateEl.textContent = fourDayDate;
-    fourDayIconEl.textContent = "Icon: " + response.list[28].weather[0].icon;
+    fourDayIconEl.setAttribute("src", "./assets/img/" + response.list[28].weather[0].icon + ".png");
     fourDayTempEl.textContent = "Temp: " + response.list[28].main.temp;
     fourDayWindEl.textContent = "Wind: " + response.list[28].wind.speed;
     fourDayHumidityEl.textContent = "Humidity: " + response.list[28].main.humidity;
@@ -234,7 +234,7 @@ var displayForcastData = function(response) {
 
     // 5 day
     var fiveDayDateEl = document.createElement("h3");
-    var fiveDayIconEl = document.createElement("p");
+    var fiveDayIconEl = document.createElement("img");
     var fiveDayTempEl = document.createElement("p");
     var fiveDayWindEl = document.createElement("p");
     var fiveDayHumidityEl = document.createElement("p");
@@ -243,7 +243,7 @@ var displayForcastData = function(response) {
     var fiveDayDate = moment.unix(response.list[36].dt).format("MM/DD/YY");
 
     fiveDayDateEl.textContent = fiveDayDate;
-    fiveDayIconEl.textContent = "Icon: " + response.list[36].weather[0].icon;
+    fiveDayIconEl.setAttribute("src", "./assets/img/" + response.list[36].weather[0].icon + ".png");
     fiveDayTempEl.textContent = "Temp: " + response.list[36].main.temp;
     fiveDayWindEl.textContent = "Wind: " + response.list[36].wind.speed;
     fiveDayHumidityEl.textContent = "Humidity: " + response.list[36].main.humidity;
