@@ -13,6 +13,8 @@ This application was made using HTML, CSS, and javascript. I used web frameworks
 * If you would like to save the city to look up again later, hit the "Save This City" button that is diplayed after searching.
 * The application will save the city to your machine's local storage, and add a button to search with ease later!
 
+## Link to Deployed Application
+[click here!](https://mrsdno.github.io/weather-dashboard/)
 
 ![screenshot](./assets/img/screenshot.png)
 
