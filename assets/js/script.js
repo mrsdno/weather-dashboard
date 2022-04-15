@@ -271,36 +271,65 @@ var saveCity = function(city) {
 
     // get the city name from the current weather display
     var cityName = document.querySelector("#city-name")
-
-    // create a button for this city name and append to container
-    var savedCityBtn = document.createElement("button");
-    savedCityBtn.innerHTML = cityName.textContent;
-    savedCitiesEl.appendChild(savedCityBtn);
-    savedCityBtn.className = "city-btn";
-   
     var newCity = cityName.textContent;
-    savedCityBtn.setAttribute("data-city", newCity);
 
-    // set city name as data attribute for the button
-    saveCityBtn.setAttribute("data-cityName", cityName.textContent);
 
     // save this city name to city name object in local storage
     // but first check if there is already something saved
     if (localStorage.cities) {
         var storedCityNames = localStorage.getItem("cities");
-    
         storedCityNames = JSON.parse(storedCityNames);
-        storedCityNames = storedCityNames.concat(newCity);
-        console.log(storedCityNames);
-        localStorage.setItem('cities', JSON.stringify(storedCityNames));
     }
-    // if there isnt set up an object that we will save to
+
+    if (storedCityNames){
+        for(i=0; i < storedCityNames.length; i++){
+            var newCityExists = false;
+            for(y=0; y < storedCityNames.length; y++){
+                if(newCity == storedCityNames[y]) {
+                    newCityExists= true;
+                }
+            }
+
+        if (newCityExists === false) {
+            storedCityNames = storedCityNames.concat(newCity);
+            console.log(storedCityNames);
+            localStorage.setItem('cities', JSON.stringify(storedCityNames));
+
+            // create a button for this city name and append to container
+            var savedCityBtn = document.createElement("button");
+            savedCityBtn.innerHTML = cityName.textContent;
+            savedCitiesEl.appendChild(savedCityBtn);
+            savedCityBtn.className = "city-btn";
+        
+            var newCity = cityName.textContent;
+            savedCityBtn.setAttribute("data-city", newCity);
+            break;
+        }
+
+        else if (newCityExists === true) {
+
+            alert("You already have this city saved!");
+            break;
+        }
+        
+    }
+    saveCityBtn.classList.add("display-none");
+}
+    
+    // if there isnt something saved set up an object that we will save to
     else {
         var storeCity = [];
         storeCity.push(newCity);
         localStorage.setItem('cities', JSON.stringify(storeCity));
-    }
 
+        // create a button for this city name and append to container
+        var savedCityBtn = document.createElement("button");
+        savedCityBtn.innerHTML = cityName.textContent;
+        savedCitiesEl.appendChild(savedCityBtn);
+        savedCityBtn.className = "city-btn";
+        savedCityBtn.setAttribute("data-city", newCity);
+    }
+    
 }
 
 var showSavedCities = function() {
