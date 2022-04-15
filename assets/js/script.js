@@ -14,7 +14,7 @@ var storedCityNames = [];
 
 var getLatLon = function(location) {
     var apiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + location + "&limit=1&appid=" + apiKey;
-    
+    if (location) {
     fetch(apiUrl).
     then(function(response) {
         if (response.ok) {
@@ -32,8 +32,10 @@ var getLatLon = function(location) {
     .catch(function(error) {
         alert("Unable to connect to weather data.")
     })
-}
 
+    
+}
+}
 
 var formSubmitHandler = function (event) {
     event.preventDefault();
@@ -78,11 +80,8 @@ var getWeatherData = function(city) {
             }
         })
         .catch(function(error){
-            alert("Unable to connect to GitHub");
+            alert("Error: Something Went Wrong");
         })
-    }
-    else {
-        alert("Can't get weather data for this city."); 
     }
 }
 
@@ -264,6 +263,8 @@ var displayForcastData = function(response) {
     fiveDayEl.appendChild(fiveDayTempEl);
     fiveDayEl.appendChild(fiveDayWindEl);
     fiveDayEl.appendChild(fiveDayHumidityEl);
+
+    saveCityBtn.classList.remove("display-none");
 }
 
 var saveCity = function(city) {
@@ -275,7 +276,10 @@ var saveCity = function(city) {
     var savedCityBtn = document.createElement("button");
     savedCityBtn.innerHTML = cityName.textContent;
     savedCitiesEl.appendChild(savedCityBtn);
+    savedCityBtn.className = "city-btn";
+   
     var newCity = cityName.textContent;
+    savedCityBtn.setAttribute("data-city", newCity);
 
     // set city name as data attribute for the button
     saveCityBtn.setAttribute("data-cityName", cityName.textContent);
@@ -299,10 +303,46 @@ var saveCity = function(city) {
 
 }
 
+var showSavedCities = function() {
+
+    var storedCityNames = JSON.parse(localStorage.getItem("cities"));
+    if (storedCityNames){
+        for(i=0; i < storedCityNames.length; i++){
+            console.log(storedCityNames[i])
+            // create a button for this city name and append to container
+            var savedCityBtn = document.createElement("button");
+            savedCityBtn.innerHTML = storedCityNames[i];
+            savedCitiesEl.appendChild(savedCityBtn);
+            savedCityBtn.className = "city-btn";
+            savedCityBtn.setAttribute("data-city", storedCityNames[i]);
+        }
+    }
+}
+
+
+showSavedCities();
 
 userFormEl.addEventListener("click", formSubmitHandler);
 
 saveCityBtn.addEventListener("click", saveCity);
+
+savedCitiesEl.addEventListener("click", function(event){
+    event.preventDefault();
+    var savedCityBtnClick = event.target.dataset.city;
+    console.log(savedCityBtnClick);
+
+    // clear old data
+    cityStateEl.value="";
+    selectedCityEl.textContent = "";
+    oneDayEl.textContent = "";
+    twoDayEl.textContent = "";
+    threeDayEl.textContent = "";
+    fourDayEl.textContent = "";
+    fiveDayEl.textContent = "";
+
+    getLatLon(savedCityBtnClick);
+
+})
 
 // Temp
 // Wind
