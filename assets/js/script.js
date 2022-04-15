@@ -14,7 +14,7 @@ var storedCityNames = [];
 var currentUVEl = document.createElement("p");
 
 var getLatLon = function(location) {
-    var apiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + location + "&limit=1&appid=" + apiKey;
+    var apiUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + location + "&limit=1&appid=" + apiKey;
     if (location) {
     fetch(apiUrl).
     then(function(response) {
