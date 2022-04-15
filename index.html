@@ -9,11 +9,14 @@
     <title>Weather Dashboard</title>
 </head>
 <body>
+    <!--header-->
     <div class="container col-12 heading">
         <h1>Weather Dashboard</h1>
     </div>
     <div class="conatiner col-12">
+        <!-- top row items (search/current conditions) -->
         <div class="row">
+            <!-- search container -->
             <div class="card col-4 search-container">
                 <h2>Search for a City:</h2>
                 <form id="user-form">
@@ -21,16 +24,20 @@
                     <button type="submit" class="btn">Search</button>
                 </form>
             </div>
+            <!-- current conditions container -->
             <div class="col-8 selected-city-container">
                 <h2 class="text-center my-auto">Search a city to get current conditions</h2>
             </div>
         </div>
+        <!-- bottom row items (saved cities/future forecast)-->
         <div class="row">
+            <!-- saved cities container -->
             <div class="card col-4 saved-cities-container">
                 <div class="btn-holder">
                     <button type="submit" class="save-btn display-none" id="save-btn">Save this City</button>
                 </div>
             </div>
+            <!-- five day forecast container -->
             <div class="col-8 five-day-forecast-container">
                 <h3>5-day Forecast</h3>
                 <div class="row">
@@ -56,5 +63,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./assets/js/script.js"></script>
+    
 </body>
 </html>

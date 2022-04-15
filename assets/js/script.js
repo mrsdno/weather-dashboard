@@ -128,17 +128,18 @@ var displayWeatherData = function(response, city) {
     // note that I declared UV index globally so I can use it later
 
     
-    // format date
+    // format data appropiately
     var currentDate = moment.unix(response.current.dt).format("MM/DD/YYYY");
+    var currentTemp = Math.round(response.current.temp);
 
     // fill elements with appropiate data
     currentCityEl.textContent = city;
     currentDateEl.textContent = " " + currentDate;
     currentIconEl.setAttribute("src", "./assets/img/" + response.current.weather[0].icon + ".png")
     currentDescriptionEl.textContent = response.current.weather[0].description
-    currentTempEl.textContent = "Current Temperature: " + response.current.temp;
-    currentWindEl.textContent = "Current Wind Speed: " + response.current.wind_speed;
-    currentHumidityEl.textContent = "Current Humidity: " + response.current.humidity;
+    currentTempEl.textContent = "Current Temperature: " + currentTemp + "°F";
+    currentWindEl.textContent = "Current Wind Speed: " + response.current.wind_speed + " mph";
+    currentHumidityEl.textContent = "Current Humidity: " + response.current.humidity + "%";
     currentUVEl.textContent = "Current UV-index: " + response.current.uvi;
 
     // append elements to page
@@ -186,14 +187,15 @@ var displayForcastData = function(response) {
     var oneDayWindEl = document.createElement("p");
     var oneDayHumidityEl = document.createElement("p");
 
-    //format date
+    //format date and round temp and round temp 
     var oneDayDate = moment.unix(response.list[4].dt).format("MM/DD/YY");
+    var oneDayTemp = Math.round(response.list[4].main.temp);
 
     oneDayDateEl.textContent = oneDayDate;
     oneDayIconEl.setAttribute("src", "./assets/img/" + response.list[4].weather[0].icon + ".png");
-    oneDayTempEl.textContent = "Temp: " + response.list[4].main.temp;
-    oneDayWindEl.textContent = "Wind: " + response.list[4].wind.speed;
-    oneDayHumidityEl.textContent = "Humidity: " + response.list[4].main.humidity;
+    oneDayTempEl.textContent = "Temp: " + oneDayTemp + "°F";
+    oneDayWindEl.textContent = "Wind: " + response.list[4].wind.speed + " mph";
+    oneDayHumidityEl.textContent = "Humidity: " + response.list[4].main.humidity + "%";
 
     oneDayEl.appendChild(oneDayDateEl);
     oneDayEl.appendChild(oneDayIconEl);
@@ -208,14 +210,15 @@ var displayForcastData = function(response) {
     var twoDayWindEl = document.createElement("p");
     var twoDayHumidityEl = document.createElement("p");
 
-    //format date
+    // format date and round temp
     var twoDayDate = moment.unix(response.list[12].dt).format("MM/DD/YY");
+    var twoDayTemp = Math.round(response.list[12].main.temp);
 
     twoDayDateEl.textContent = twoDayDate;
     twoDayIconEl.setAttribute("src", "./assets/img/" + response.list[12].weather[0].icon + ".png");
-    twoDayTempEl.textContent = "Temp: " + response.list[12].main.temp;
-    twoDayWindEl.textContent = "Wind: " + response.list[12].wind.speed;
-    twoDayHumidityEl.textContent = "Humidity: " + response.list[12].main.humidity;
+    twoDayTempEl.textContent = "Temp: " + twoDayTemp + "°F";
+    twoDayWindEl.textContent = "Wind: " + response.list[12].wind.speed + " mph";
+    twoDayHumidityEl.textContent = "Humidity: " + response.list[12].main.humidity + "%";
 
     twoDayEl.appendChild(twoDayDateEl);
     twoDayEl.appendChild(twoDayIconEl);
@@ -230,14 +233,15 @@ var displayForcastData = function(response) {
     var threeDayWindEl = document.createElement("p");
     var threeDayHumidityEl = document.createElement("p");
 
-    //format date
+    //format date and round temp
     var threeDayDate = moment.unix(response.list[20].dt).format("MM/DD/YY");
+    var threeDayTemp = Math.round(response.list[20].main.temp);
 
     threeDayDateEl.textContent = threeDayDate;
     threeDayIconEl.setAttribute("src", "./assets/img/" + response.list[20].weather[0].icon + ".png");
-    threeDayTempEl.textContent = "Temp: " + response.list[20].main.temp;
-    threeDayWindEl.textContent = "Wind: " + response.list[20].wind.speed;
-    threeDayHumidityEl.textContent = "Humidity: " + response.list[20].main.humidity;
+    threeDayTempEl.textContent = "Temp: " + threeDayTemp + "°F";
+    threeDayWindEl.textContent = "Wind: " + response.list[20].wind.speed + " mph";
+    threeDayHumidityEl.textContent = "Humidity: " + response.list[20].main.humidity + "%";
 
     threeDayEl.appendChild(threeDayDateEl);
     threeDayEl.appendChild(threeDayIconEl);
@@ -252,14 +256,15 @@ var displayForcastData = function(response) {
     var fourDayWindEl = document.createElement("p");
     var fourDayHumidityEl = document.createElement("p");
 
-    //format date
+    //format date and round temp
     var fourDayDate = moment.unix(response.list[28].dt).format("MM/DD/YY");
+    var fourDayTemp = Math.round(response.list[28].main.temp);
 
     fourDayDateEl.textContent = fourDayDate;
     fourDayIconEl.setAttribute("src", "./assets/img/" + response.list[28].weather[0].icon + ".png");
-    fourDayTempEl.textContent = "Temp: " + response.list[28].main.temp;
-    fourDayWindEl.textContent = "Wind: " + response.list[28].wind.speed;
-    fourDayHumidityEl.textContent = "Humidity: " + response.list[28].main.humidity;
+    fourDayTempEl.textContent = "Temp: " + fourDayTemp + "°F";
+    fourDayWindEl.textContent = "Wind: " + response.list[28].wind.speed + " mph";
+    fourDayHumidityEl.textContent = "Humidity: " + response.list[28].main.humidity + "%";
 
     fourDayEl.appendChild(fourDayDateEl);
     fourDayEl.appendChild(fourDayIconEl);
@@ -274,14 +279,15 @@ var displayForcastData = function(response) {
     var fiveDayWindEl = document.createElement("p");
     var fiveDayHumidityEl = document.createElement("p");
 
-    //format date
+    //format date and round temp
     var fiveDayDate = moment.unix(response.list[36].dt).format("MM/DD/YY");
+    var fiveDayTemp = Math.round(response.list[36].main.temp);
 
     fiveDayDateEl.textContent = fiveDayDate;
     fiveDayIconEl.setAttribute("src", "./assets/img/" + response.list[36].weather[0].icon + ".png");
-    fiveDayTempEl.textContent = "Temp: " + response.list[36].main.temp;
-    fiveDayWindEl.textContent = "Wind: " + response.list[36].wind.speed;
-    fiveDayHumidityEl.textContent = "Humidity: " + response.list[36].main.humidity;
+    fiveDayTempEl.textContent = "Temp: " + fiveDayTemp + "°F";
+    fiveDayWindEl.textContent = "Wind: " + response.list[36].wind.speed + " mph";
+    fiveDayHumidityEl.textContent = "Humidity: " + response.list[36].main.humidity + "%";
 
     fiveDayEl.appendChild(fiveDayDateEl);
     fiveDayEl.appendChild(fiveDayIconEl);
