@@ -60,7 +60,7 @@
 /* five day forecast */
 
 .five-day {
-    background-color: #36454F;
+    background-color: var(--charcoal);
     color: #fff;
     margin: 5px;
     min-height: 250px;
@@ -81,7 +81,7 @@
 
 .five-day-forecast-container {
     background-color: var(--teal);
-    padding: 10px 0px 0px 30px;
+    padding: 10px 0px 10px 30px;
     border-radius: 5px;
     color: white;
 }

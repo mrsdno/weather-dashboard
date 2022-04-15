@@ -11,6 +11,7 @@ var savedCitiesEl = document.querySelector(".saved-cities-container");
 var saveCityBtn = document.querySelector("#save-btn");
 var city = "";
 var storedCityNames = [];
+var currentUVEl = document.createElement("p");
 
 var getLatLon = function(location) {
     var apiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + location + "&limit=1&appid=" + apiKey;
@@ -113,6 +114,8 @@ var getForecastData =function(city) {
     }
 }
 
+
+
 var displayWeatherData = function(response, city) {
     // create elements to hold data
     var currentCityEl = document.createElement("h2");
@@ -122,7 +125,8 @@ var displayWeatherData = function(response, city) {
     var currentTempEl = document.createElement("p");
     var currentWindEl = document.createElement("p");
     var currentHumidityEl = document.createElement("p");
-    var currentUVEl = document.createElement("p");
+    // note that I declared UV index globally so I can use it later
+
     
     // format date
     var currentDate = moment.unix(response.current.dt).format("MM/DD/YYYY");
@@ -150,6 +154,27 @@ var displayWeatherData = function(response, city) {
     // add attribute to city element to select text later
     currentCityEl.setAttribute("id", "city-name");
 
+    // format UV index
+    var uvIndex = response.current.uvi;
+
+    uvIndexColor(uvIndex);
+    
+}
+
+var uvIndexColor = function(uvIndex) {
+    console.log(uvIndex);
+    if(uvIndex <= 2) {
+        currentUVEl.className = "";
+        currentUVEl.classList.add("badge", "badge-success");
+    }
+    else if (uvIndex >2 && uvIndex <= 7) {
+        currentUVEl.className = "";
+        currentUVEl.classList.add("badge", "badge-warning");
+    }
+    else if (uvIndex > 7) {
+        currentUVEl.className = "";
+        currentUVEl.classList.add("badge", "badge-danger");
+    }
 }
 
 var displayForcastData = function(response) {
