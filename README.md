@@ -2,7 +2,7 @@
 
 ## About this Application
 
-This application was made for user's who want to be able to view the current and future weather conditions of multiple cities so they can plan their trip accordingly.
+This application was made for users who want to be able to view the current and future weather conditions of multiple cities so they can plan their trip accordingly.
 
 This application was made using HTML, CSS, and javascript. I used web frameworks such as [moment.js](https://momentjs.com/) for easy date formatting within javascript and [bootstrap](https://getbootstrap.com/docs/3.4/css/) for CSS formatting.
 
